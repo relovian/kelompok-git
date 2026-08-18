@@ -30,7 +30,7 @@ $tasks = $result->fetch_all(MYSQLI_ASSOC);
 <body>
     <div class="app-container">
         <header class="app-header">
-            <h1>Todo List</h1>
+            <h1>Todo-List</h1>
             <div class="user-info">
                 <span><?php echo htmlspecialchars($_SESSION['username']); ?></span>
                 <a href="../auth/logout.php" class="btn btn-secondary">Logout</a>
