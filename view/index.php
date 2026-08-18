@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+// Jika belum login, redirect ke halaman login
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header("Location: login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -11,8 +20,8 @@
         <header class="app-header">
             <h1>Todo List</h1>
             <div class="user-info">
-                <span> User</span>
-                <a href="login.html" class="btn btn-secondary">Logout</a>
+                <span><?php echo htmlspecialchars($_SESSION['username']); ?></span>
+                <a href="../auth/logout.php" class="btn btn-secondary">Logout</a>
             </div>
         </header>
 
