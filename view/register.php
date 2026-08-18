@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+// Jika sudah login, redirect ke dashboard
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+    header("Location: index.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -13,14 +22,21 @@
                 <h1>Todo List</h1>
                 <p>Buat akun baru untuk memulai</p>
             </div>
-            <form id="registerForm" action="login.html" method="GET">
-                <div class="form-group">
-                    <label for="registerName">Nama Lengkap</label>
-                    <input type="text" id="registerName" name="name" placeholder="Masukkan nama lengkap" required>
+
+            <?php if (isset($_SESSION['error'])): ?>
+                <div class="alert alert-error">
+                    <?php
+                    echo $_SESSION['error'];
+                    unset($_SESSION['error']);
+                    ?>
                 </div>
+            <?php endif; ?>
+
+            <form action="../auth/proses_registrasi.php" method="POST">
                 <div class="form-group">
-                    <label for="registerEmail">Email</label>
-                    <input type="email" id="registerEmail" name="email" placeholder="Masukkan email" required>
+                    <label for="registerUsername">Username</label>
+                    <input type="text" id="registerUsername" name="username" placeholder="Masukkan username" value="<?php echo isset($_SESSION['old_username']) ? htmlspecialchars($_SESSION['old_username']) : ''; ?>" required>
+                    <?php unset($_SESSION['old_username']); ?>
                 </div>
                 <div class="form-group">
                     <label for="registerPassword">Password</label>
@@ -33,7 +49,7 @@
                 <button type="submit" class="btn btn-primary btn-block">Daftar</button>
             </form>
             <p class="auth-footer">
-                Sudah punya akun? <a href="login.html">Login di sini</a>
+                Sudah punya akun? <a href="login.php">Login di sini</a>
             </p>
         </div>
     </div>
