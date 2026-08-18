@@ -199,11 +199,13 @@ body {
 
 .todo-input-section form {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
 }
 
 .todo-input-section input {
     flex: 1;
+    min-width: 150px;
     padding: 12px 15px;
     border: 2px solid #e0e0e0;
     border-radius: 8px;
@@ -214,6 +216,19 @@ body {
 .todo-input-section input:focus {
     outline: none;
     border-color: #667eea;
+}
+
+.todo-input-section input[name="title"] {
+    flex: 2;
+}
+
+.todo-input-section input[name="description"] {
+    flex: 2;
+}
+
+.todo-input-section input[name="due_date"] {
+    flex: 1;
+    min-width: 180px;
 }
 
 .todo-filters {
@@ -283,10 +298,58 @@ body {
     accent-color: #667eea;
 }
 
-.todo-text {
+.todo-checkbox-form {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.todo-checkbox-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #667eea;
+    padding: 0;
+    line-height: 1;
+    transition: transform 0.2s;
+}
+
+.todo-checkbox-btn:hover {
+    transform: scale(1.2);
+}
+
+.todo-item.completed .todo-checkbox-btn {
+    color: #28a745;
+}
+
+.todo-content {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.todo-text {
     font-size: 1rem;
     word-break: break-word;
+}
+
+.todo-description {
+    font-size: 0.85rem;
+    color: #666;
+    word-break: break-word;
+}
+
+.todo-due-date {
+    font-size: 0.8rem;
+    color: #888;
+    font-weight: 500;
+}
+
+.todo-delete-form {
+    flex-shrink: 0;
 }
 
 .todo-delete {
@@ -301,6 +364,15 @@ body {
 
 .todo-delete:hover {
     transform: scale(1.2);
+}
+
+.todo-empty {
+    justify-content: center;
+    text-align: center;
+    color: #999;
+    padding: 30px;
+    font-size: 1rem;
+    border-style: dashed;
 }
 
 .empty-message {
@@ -336,6 +408,14 @@ body {
 
     .todo-input-section form {
         flex-direction: column;
+    }
+
+    .todo-input-section input,
+    .todo-input-section input[name="title"],
+    .todo-input-section input[name="description"],
+    .todo-input-section input[name="due_date"] {
+        width: 100%;
+        min-width: 0;
     }
 
     .todo-filters {
